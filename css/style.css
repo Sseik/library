@@ -1,0 +1,246 @@
+@import "./reset.css";
+
+@font-face {
+  font-family: "Alex Brush";
+  src:
+    url("../assets/fonts/alexbrush-regular-webfont.woff2") format("woff2"),
+    url("../assets/fonts/alexbrush-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --orange: #dc891f;
+  --text-color: #222;
+  --bg-color: #f2dcb1;
+  --shelf-color: #332422;
+  --shelf-bg-color: #3a2e2c;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-colo--shelf-colorr);
+  min-height: 100vh;
+}
+
+header {
+  width: 100%;
+  background-color: var(--orange);
+  display: flex;
+  align-items: center;
+  padding: 16px 32px;
+  gap: 16px;
+  box-shadow: 0px 4px 8px grey;
+  h1 {
+    font-family: "Alex Brush", fantasy;
+    font-size: 3rem;
+  }
+  img {
+    height: 5rem;
+    width: auto;
+  }
+}
+
+main {
+  height: calc(100vh - 112px);
+  padding: 32px;
+  display: grid;
+  grid: auto 1fr / 1fr 1fr;
+  grid-auto-flow: column;
+  gap: 32px;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+.bookshelves {
+  display: grid;
+  border: 8px solid var(--shelf-color);
+  row-gap: 8px;
+  grid-auto-rows: max(20ch, 10%);
+  grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+  background-color: var(--shelf-bg-color);
+}
+
+.book {
+  height: 100%;
+  border: 1px solid rgb(0, 0, 50);
+  writing-mode: vertical-rl;
+  text-align: center;
+  cursor: pointer;
+  transform: rotate(180deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: darkblue;
+  color: #fafafa;
+  position: relative;
+  text-shadow: 1px 1px black;
+}
+
+.spine-text {
+  max-width: calc(100% - 4px);
+  margin: 6px 2px;
+  overflow: hidden;
+  line-height: 1.2;
+}
+
+.bookmark,
+.bookmark-shadow {
+  position: absolute;
+  height: 30%;
+  width: 12px;
+  background-color: darkred;
+  bottom: 0;
+  left: 6px;
+  clip-path: polygon(0 100%, 0 0, 50% 10%, 100% 0, 100% 100%);
+}
+
+.bookmark-shadow {
+  background-color: #1119;
+  bottom: 3px;
+}
+
+.gradient-shadow {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(#1115, #1115 25%, #0002 75%, #1110);
+}
+
+.book:hover,
+.book:focus {
+  --transition-duration: 0.7s;
+  outline: none;
+  transform: scale(1.5) rotate(180deg) translateY(-32px);
+  box-shadow: 0px -4px 2px #1119;
+  background-color: rgb(0, 0, 180);
+  color: white;
+  & .bookmark {
+    background-color: red;
+    transition: background 0.5s;
+  }
+  transition:
+    transform var(--transition-duration),
+    box-shadow var(--transition-duration),
+    background var(--transition-duration),
+    color var(--transition-duration);
+  z-index: 1;
+  &::after {
+    display: none;
+  }
+}
+
+.book::after {
+  content: " ";
+  height: 8px;
+  width: 110%;
+  background-color: var(--shelf-color);
+  position: absolute;
+  top: -8px;
+}
+
+.opened-book {
+  background-image: url("../assets/images/opened-book.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  font-family: "Alex Brush";
+  font-size: 3rem;
+  text-align: center;
+}
+
+.left-page,
+.right-page {
+  height: calc((25vw - 64px) / 0.85);
+  padding-bottom: 5%;
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
+.left-page {
+  padding-left: 20%;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  align-items: end;
+}
+
+.right-page {
+  padding-right: 15%;
+  padding-left: 5%;
+}
+
+.status {
+  color: red;
+  &::after {
+    content: "Not Read";
+  }
+  &:hover {
+    cursor: pointer;
+    &::after {
+      opacity: 0.5;
+    }
+  }
+}
+
+.status.read {
+  color: green;
+  &::after {
+    content: "Read";
+  }
+}
+
+.actions {
+  cursor: pointer;
+  font-style: italic;
+  font-size: 0.8em;
+  & .edit-button {
+    &:hover {
+      opacity: 0.8;
+      font-size: 1.1em;
+    }
+  }
+  & .remove-button {
+    &:hover {
+      color: darkorange;
+      font-size: 1.1em;
+    }
+  }
+}
+
+.add-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  font-weight: bold;
+  &:hover {
+    font-size: 3rem;
+  }
+  transition: font-size 0.1s;
+  position: relative;
+  background-color: #0001;
+  &::after {
+    content: " ";
+    height: 8px;
+    width: 110%;
+    background-color: var(--shelf-color);
+    position: absolute;
+    bottom: -8px;
+  }
+}
+
+h2 {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 2.5rem;
+  text-shadow: 1px 1px #0004;
+}
