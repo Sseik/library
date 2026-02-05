@@ -20,24 +20,20 @@
     <main>
       <h2>Bookshelves</h2>
       <section class="bookshelves">
-        <div
-          tabindex="0"
-          title="Witcher: The Last Wish"
-          class="book"
-        >
+        <div tabindex="0" title="Witcher: The Last Wish" class="book">
           <div class="bookmark-shadow"></div>
           <div class="bookmark"></div>
           <div class="gradient-shadow"></div>
-          <div class="spine-text">
-            Witcher: The Last Wish
-          </div>
+          <div class="spine-text">Witcher: The Last Wish</div>
         </div>
         <div class="add-button">+</div>
       </section>
       <h2>Book</h2>
       <section class="opened-book">
         <div class="left-page">
-          <div class="number-of-pages">300 pages</div>
+          <div class="number-of-pages">
+            <span class="number-of-pages">300</span> pages
+          </div>
           <div class="status"></div>
           <div class="actions">
             <div class="edit-button">Edit Information</div>
@@ -51,5 +47,37 @@
         </div>
       </section>
     </main>
+    <div class="new-book-modal not-displayed">
+      <form class="card">
+        <label for="book-title-input">Title:</label>
+        <input type="text" name="bookTitle" id="book-title-input" />
+        <label for="book-author-input">Author:</label>
+        <input type="text" name="bookAuthor" id="book-author-input" />
+        <label for="pages-number-input">Number of pages:</label>
+        <input type="tel" name="pagesNumber" id="pages-number-input" />
+        <fieldset>
+          <legend>Have you read this book?</legend>
+          <div class="input-container">
+            <label for="read-status-radio">Yes</label>
+            <input
+              type="radio"
+              name="status"
+              id="read-status-radio"
+              value="1"
+            />
+          </div>
+          <div class="input-container">
+            <label for="not-read-status-radio">No</label>
+            <input
+              type="radio"
+              name="status"
+              id="not-read-status-radio"
+              value=""
+            />
+          </div>
+        </fieldset>
+        <button type="submit" class="submit-book">Add to library</button>
+      </form>
+    </div>
   </body>
 </html>

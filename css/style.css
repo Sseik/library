@@ -7,6 +7,7 @@
     url("../assets/fonts/alexbrush-regular-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal;
+  font-display: block;
 }
 
 :root {
@@ -19,7 +20,7 @@
 
 body {
   background-color: var(--bg-color);
-  color: var(--text-colo--shelf-colorr);
+  color: var(--text-color);
   min-height: 100vh;
 }
 
@@ -247,4 +248,92 @@ h2 {
   font-size: 2.5rem;
   text-shadow: 1px 1px #0004;
   visibility: hidden;
+}
+
+.new-book-modal {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0004;
+  form.card {
+    display: flex;
+    flex-direction: column;
+    width: max(500px, 40vw);
+    background-color: #e0ddd1;
+    padding: 32px;
+    font-family: "Alex Brush", fantasy;
+    font-size: 2rem;
+    input:not([type="radio"]) {
+      appearance: none;
+      border: none;
+      background: none;
+      outline: none;
+      border-bottom: 1px solid var(--text-color);
+    }
+    fieldset {
+      display: flex;
+      justify-content: space-between;
+      padding: 0;
+      border: none;
+    }
+    input[type="radio"] {
+      appearance: none;
+      &::after {
+        display: block;
+        content: "";
+        height: 2rem;
+        width: 2rem;
+        flex-basis: 2rem;
+        min-width: 2rem;
+        flex-shrink: 0;
+        border: 1px solid var(--text-color);
+      }
+      &:checked {
+        &::after {
+          content: "✗";
+          text-align: center;
+        }
+        &[value="1"] {
+          &::after {
+            content: "✓";
+            text-align: center;
+          }
+        }
+      }
+    }
+    button {
+      border: none;
+      background: none;
+      border-bottom: 1px solid var(--text-color);
+      &:hover {
+        opacity: 0.8;
+        font-size: 1.1em;
+      }
+      &:active {
+        color: black;
+        font-size: 0.9em;
+      }
+    }
+  }
+}
+
+input:not([type="radio"]),
+fieldset,
+legend {
+  margin-bottom: 1rem;
+}
+
+.input-container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.not-displayed {
+  display: none;
 }
