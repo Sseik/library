@@ -226,8 +226,9 @@ h2 {
   font-size: 2rem;
   cursor: pointer;
   font-weight: bold;
-  &:hover {
+  &:hover, &:focus {
     font-size: 3rem;
+    outline: none;
   }
   transition: font-size 0.1s;
   position: relative;
@@ -288,9 +289,6 @@ h2 {
         content: "";
         height: 2rem;
         width: 2rem;
-        flex-basis: 2rem;
-        min-width: 2rem;
-        flex-shrink: 0;
         border: 1px solid var(--text-color);
       }
       &:checked {
@@ -305,12 +303,19 @@ h2 {
           }
         }
       }
+      &:focus {
+        &::after {
+          width: 2.1rem;
+          height: 2.1rem;
+          font-size: 2.1rem;
+        }
+      }
     }
     button {
       border: none;
       background: none;
       border-bottom: 1px solid var(--text-color);
-      &:hover {
+      &:hover, &:focus {
         opacity: 0.8;
         font-size: 1.1em;
       }
@@ -326,6 +331,10 @@ input:not([type="radio"]),
 fieldset,
 legend {
   margin-bottom: 1rem;
+}
+
+input, button {
+  outline: none;
 }
 
 .input-container {
