@@ -42,7 +42,7 @@ Book.prototype.placeOnShelf = function () {
     if (this.isRead) statusDiv.classList.add("read");
     else statusDiv.classList.remove("read");
     document.querySelector(".book-name").textContent = this.title;
-    document.querySelector(".book-author").textContent = this.author;
+    document.querySelector(".author").textContent = this.author;
   });
   bookshelves.insertBefore(bookDiv, addBookButton);
 };
