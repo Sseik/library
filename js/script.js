@@ -6,6 +6,7 @@ const bookshelves = document.querySelector(".bookshelves");
 const newBookForm = newBookModal.querySelector("form");
 
 const myLibrary = [];
+let chosenBook;
 
 function toggleNewBookModalDisplay() {
   newBookModal.classList.toggle("not-displayed");
@@ -34,7 +35,24 @@ Book.prototype.placeOnShelf = function () {
   bookDiv.id = this.id;
   bookDiv.title = this.title;
   bookDiv.append(bookmarkShadow, bookmark, gradientShadow, spineText);
+  bookDiv.addEventListener("click", () => {
+    chosenBook = this;
+    document.querySelector("span.number-of-pages").textContent =
+      this.numberOfPages;
+    if (this.isRead) statusDiv.classList.add("read");
+    else statusDiv.classList.remove("read");
+    document.querySelector(".book-name").textContent = this.title;
+    document.querySelector(".book-author").textContent = this.author;
+  });
   bookshelves.insertBefore(bookDiv, addBookButton);
+};
+
+Book.prototype.toggleStatus = function () {
+  this.isRead = !this.isRead;
+  if (chosenBook === this) {
+    if (this.isRead) statusDiv.classList.add("read");
+    else statusDiv.classList.remove("read");
+  }
 };
 
 function addBookToLibrary(title, author, numberOfPages, isRead) {
@@ -48,7 +66,14 @@ function displayBooks() {
 
 displayBooks();
 
-statusDiv.addEventListener("click", () => statusDiv.classList.toggle("read"));
+statusDiv.addEventListener("click", () => {
+  if (!chosenBook) {
+    // I'm leaving an example of an opened book for now
+    statusDiv.classList.toggle("read");
+    return;
+  }
+  chosenBook.toggleStatus();
+});
 addBookButton.addEventListener("click", toggleNewBookModalDisplay);
 submitBookButton.addEventListener("click", (e) => {
   e.preventDefault();
