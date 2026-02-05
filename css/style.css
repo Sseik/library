@@ -120,6 +120,7 @@ h2 {
   box-shadow: 0px -4px 2px #1119;
   background-color: rgb(0, 0, 180);
   color: white;
+  border-bottom: 3px solid #e0ddd1;
   & .bookmark {
     background-color: red;
     transition: background 0.5s;
@@ -128,22 +129,11 @@ h2 {
     transform var(--transition-duration),
     box-shadow var(--transition-duration),
     background var(--transition-duration),
-    color var(--transition-duration);
+    color var(--transition-duration),
+    border var(--transition-duration);
   z-index: 1;
   &::after {
     display: none;
-  }
-}
-
-.book:hover,
-.book:focus {
-  ::before {
-    content: " ";
-    height: 4px;
-    width: 90%;
-    position: absolute;
-    background-color: #e0ddd1;
-    bottom: -3px;
   }
 }
 
