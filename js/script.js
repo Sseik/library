@@ -49,6 +49,7 @@ Book.prototype.placeOnShelf = function () {
     document.querySelector(".author").textContent = this.author;
     leftPage.classList.remove("not-displayed");
     rightPage.classList.remove("not-displayed");
+    document.activeElement.blur();
   });
   bookshelves.insertBefore(bookDiv, addBookButton);
 };
