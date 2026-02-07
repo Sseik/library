@@ -351,3 +351,7 @@ button {
 .not-displayed {
   display: none;
 }
+
+.error-message {
+  color: red;
+}

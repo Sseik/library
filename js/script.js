@@ -8,6 +8,7 @@ const removeBookButton = document.querySelector(".remove-button");
 const leftPage = document.querySelector(".left-page");
 const rightPage = document.querySelector(".right-page");
 const editBookButton = document.querySelector(".edit-button");
+const errorMessageDiv = document.querySelector(".error-message");
 
 const myLibrary = [];
 let chosenBook;
@@ -88,8 +89,6 @@ displayBooks();
 
 statusDiv.addEventListener("click", () => {
   if (!chosenBook) {
-    // I'm leaving an example of an opened book for now
-    statusDiv.classList.toggle("read");
     return;
   }
   chosenBook.toggleStatus();
@@ -102,6 +101,11 @@ submitBookButton.addEventListener("click", (e) => {
   const title = document.querySelector("#book-title-input").value;
   const author = document.querySelector("#book-author-input").value;
   const numberOfPages = document.querySelector("#pages-number-input").value;
+  const checkedStatusInput = document.querySelector("input:checked[name='status']");
+  if (!checkedStatusInput) {
+    errorMessageDiv.textContent = "You forgot to tell me whether you have read this book!";
+    return;
+  }
   const isRead = !!document.querySelector("input:checked[name='status']").value;
   if (isBeingEdited) {
     chosenBook.edit({ title, author, numberOfPages, isRead });
@@ -111,6 +115,7 @@ submitBookButton.addEventListener("click", (e) => {
   }
   displayBooks();
   newBookForm.reset();
+  errorMessageDiv.textContent = "";
   toggleNewBookModalDisplay();
 });
 
