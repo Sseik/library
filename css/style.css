@@ -263,6 +263,7 @@ h2 {
   justify-content: center;
   align-items: center;
   background-color: #0004;
+  z-index: 2;
   form.card {
     display: flex;
     flex-direction: column;
