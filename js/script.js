@@ -34,6 +34,7 @@ Book.prototype.placeOnShelf = function () {
   spineText.textContent = this.title;
   bookDiv.id = this.id;
   bookDiv.title = this.title;
+  bookDiv.tabIndex = 0;
   bookDiv.append(bookmarkShadow, bookmark, gradientShadow, spineText);
   bookDiv.addEventListener("click", () => {
     chosenBook = this;
@@ -42,7 +43,7 @@ Book.prototype.placeOnShelf = function () {
     if (this.isRead) statusDiv.classList.add("read");
     else statusDiv.classList.remove("read");
     document.querySelector(".book-name").textContent = this.title;
-    document.querySelector(".author").textContent = this.author;
+    document.querySelector(". author").textContent = this.author;
   });
   bookshelves.insertBefore(bookDiv, addBookButton);
 };
@@ -90,11 +91,6 @@ document.addEventListener("keydown", (e) => {
   switch (e.key) {
     case "Escape":
       newBookModal.classList.add("not-displayed");
-      break;
-    case "Enter":
-      if (!newBookModal.classList.contains("not-displayed")) {
-        submitBookButton.click();
-      }
       break;
     case " ":
       document.activeElement.click();
