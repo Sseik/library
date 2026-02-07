@@ -4,6 +4,9 @@ const submitBookButton = document.querySelector(".submit-book");
 const newBookModal = document.querySelector(".new-book-modal");
 const bookshelves = document.querySelector(".bookshelves");
 const newBookForm = newBookModal.querySelector("form");
+const removeBookButton = document.querySelector(".remove-button");
+const leftPage = document.querySelector(".left-page");
+const rightPage = document.querySelector(".right-page");
 
 const myLibrary = [];
 let chosenBook;
@@ -32,7 +35,7 @@ Book.prototype.placeOnShelf = function () {
   const spineText = document.createElement("div");
   spineText.classList.add("spine-text");
   spineText.textContent = this.title;
-  bookDiv.id = this.id;
+  bookDiv.id = `book${this.id}`;
   bookDiv.title = this.title;
   bookDiv.tabIndex = 0;
   bookDiv.append(bookmarkShadow, bookmark, gradientShadow, spineText);
@@ -44,6 +47,8 @@ Book.prototype.placeOnShelf = function () {
     else statusDiv.classList.remove("read");
     document.querySelector(".book-name").textContent = this.title;
     document.querySelector(".author").textContent = this.author;
+    leftPage.classList.remove("not-displayed");
+    rightPage.classList.remove("not-displayed");
   });
   bookshelves.insertBefore(bookDiv, addBookButton);
 };
@@ -75,7 +80,9 @@ statusDiv.addEventListener("click", () => {
   }
   chosenBook.toggleStatus();
 });
+
 addBookButton.addEventListener("click", toggleNewBookModalDisplay);
+
 submitBookButton.addEventListener("click", (e) => {
   e.preventDefault();
   const title = document.querySelector("#book-title-input").value;
@@ -87,6 +94,7 @@ submitBookButton.addEventListener("click", (e) => {
   newBookForm.reset();
   toggleNewBookModalDisplay();
 });
+
 document.addEventListener("keydown", (e) => {
   switch (e.key) {
     case "Escape":
@@ -96,3 +104,11 @@ document.addEventListener("keydown", (e) => {
       document.activeElement.click();
   }
 });
+
+removeBookButton.addEventListener("click", () => {
+  document.querySelector(`#book${chosenBook.id}`).remove();
+  myLibrary.splice(myLibrary.indexOf(chosenBook), 1);
+  chosenBook = null;
+  leftPage.classList.add("not-displayed");
+  rightPage.classList.add("not-displayed");
+})
